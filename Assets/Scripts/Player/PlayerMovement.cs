@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private float timeSinceLastDash;
     //private float doubleTapTime;
     //private KeyCode lastKeyCode;
+    private bool levelComplete;
 
     private bool isMoving;
     private bool isFacingRight;
@@ -46,10 +47,19 @@ public class PlayerMovement : MonoBehaviour
         //boxCollider = GetComponent<BoxCollider2D>();
         capsuleCollider = GetComponent <CapsuleCollider2D>();
         attackCollider.SetActive(false);
+        levelComplete = false;
+
+        EventManager.levelComplete += LevelCompleted;
     }
 
     private void Update()
     {
+        if (levelComplete)
+        {
+            animator.SetBool("isEnteringDoor", true);
+            return;
+        }
+
         HandleJump();
 
         timeSinceLastDash -= Time.deltaTime;
@@ -70,70 +80,8 @@ public class PlayerMovement : MonoBehaviour
                 }
                 
             }
-
-            ////Dash left
-            //if (Input.GetKeyDown(KeyCode.A))
-            //{
-            //    if (doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
-            //    {
-            //        StartCoroutine(Dash(-1f));
-            //    }
-            //    else
-            //    {
-            //        doubleTapTime = Time.time + 0.3f;
-            //    }
-
-            //    lastKeyCode = KeyCode.A;
-            //}
-
-            ////Dash right
-            //if (Input.GetKeyDown(KeyCode.D))
-            //{
-            //    if (doubleTapTime > Time.time && lastKeyCode == KeyCode.D)
-            //    {
-            //        StartCoroutine(Dash(1f));
-            //    }
-            //    else
-            //    {
-            //        doubleTapTime = Time.time + 0.3f;
-            //    }
-
-            //    lastKeyCode = KeyCode.D;
-            //}
         }
-        
 
-        //if (IsGrounded() && rb.velocity.y == 0)
-        //{
-        //    //animator.SetBool("isJumping", false);
-        //}
-
-        //if (!isMoving)
-        //{
-        //    input.x = Input.GetAxisRaw("Horizontal");
-
-        //    if (input != Vector2.zero)
-        //    {
-        //        animator.SetFloat("moveX", input.x);
-
-        //        //Flips sprite based on movement direction
-        //        if (input.x < 0)
-        //            spriteRenderer.flipX = true;
-        //        else
-        //            spriteRenderer.flipX = false;
-
-        //        //var targetPos = transform.position;
-        //        //targetPos.x += input.x;
-
-        //        //StartCoroutine(Move(targetPos));
-        //    }
-
-        //    animator.SetBool("isMoving", isMoving);
-        //}
-        //if (IsGrounded())
-        //{
-        //    HandleMovement();
-        //}
         if (!isDashing)
         {
             HandleMovement();
@@ -170,13 +118,6 @@ public class PlayerMovement : MonoBehaviour
         //HandleMovement();
 
         HandleAnimation();
-
-        
-        //else if (Input.GetMouseButtonUp(0))
-        //{
-        //    animator.SetBool("isAttacking", false);
-        //    attackCollider.SetActive(false);
-        //}
     }
 
     IEnumerator Move(Vector3 targetPos)
@@ -291,6 +232,11 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = false;
         rb.gravityScale = gravity;
+    }
+
+    private void LevelCompleted()
+    {
+        levelComplete = true;
     }
 
     private void HandleAnimation()

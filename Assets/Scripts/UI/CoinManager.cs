@@ -21,18 +21,16 @@ public class CoinManager : MonoBehaviour
         UpdateCount(0);
     }
 
-    private IEnumerator IncreaseCount()
-    {
-        Debug.Log("Updating count");
-        //UpdateCount(testCount.ToString());
-        UpdateCount(testCount);
+    //private IEnumerator IncreaseCount()
+    //{
+    //    UpdateCount(testCount);
 
-        yield return new WaitForSeconds(0.1f);
+    //    yield return new WaitForSeconds(0.1f);
 
-        testCount++;
-        Debug.Log("Increasing count");
-        StartCoroutine("IncreaseCount");
-    }
+    //    testCount++;
+
+    //    StartCoroutine("IncreaseCount");
+    //}
 
     public void CollectCoin()
     {
@@ -41,12 +39,6 @@ public class CoinManager : MonoBehaviour
 
     public void UpdateCount(int newCount)
     {
-        //Debug.Log("Value of newCount: " + newCount);
-        //Debug.Log("Char at index 0: " + newCount[0]);
-        //Debug.Log("Length of newCount string: " + newCount.Length);
-
-        Debug.Log("Value of newCount: " + newCount);
-
         if (newCount < 10)
         {
             digit0.sprite = fontManager.ReturnNumSprite(0);
