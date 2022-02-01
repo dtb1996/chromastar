@@ -15,7 +15,10 @@ public class CoinManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("IncreaseCount");
+        //StartCoroutine("IncreaseCount");
+        PlayerInventory.inventoryChange += CollectCoin;
+
+        UpdateCount(0);
     }
 
     private IEnumerator IncreaseCount()
@@ -29,6 +32,11 @@ public class CoinManager : MonoBehaviour
         testCount++;
         Debug.Log("Increasing count");
         StartCoroutine("IncreaseCount");
+    }
+
+    public void CollectCoin()
+    {
+        UpdateCount(PlayerInventory.Instance.coins);
     }
 
     public void UpdateCount(int newCount)

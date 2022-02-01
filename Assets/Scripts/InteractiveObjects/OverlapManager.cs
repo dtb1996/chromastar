@@ -12,6 +12,8 @@ public class OverlapManager : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            HandleOverlap();
+
             if (soundEffect)
             {
                 soundEffect.StartCoroutine("PlaySound");
@@ -22,5 +24,20 @@ public class OverlapManager : MonoBehaviour
             
             Destroy(this.gameObject);
         }
+    }
+
+    private void HandleOverlap()
+    {
+        switch (this.tag)
+        {
+            case "Coin":
+                PlayerInventory.Instance.IncreaseCoins(1);
+                break;
+        }
+
+        //if (this.tag == "Coin")
+        //{
+        //    PlayerInventory.Instance.IncreaseCoins(1);
+        //}
     }
 }
