@@ -9,8 +9,14 @@ public class EventManager : MonoBehaviour
     public delegate void LevelCompleteDelegate();
     public static LevelCompleteDelegate levelComplete;
 
-    //public void LevelComleted()
-    //{
-    //    levelComplete.Invoke();
-    //}
+    private void Start()
+    {
+        LevelCompleted();
+    }
+
+    public void LevelCompleted()
+    {
+        Debug.Log("Level complete");
+        LevelManager.ChangeLevel("level_2");
+    }
 }

@@ -49,32 +49,6 @@ public class CoinManager : MonoBehaviour
             digit0.sprite = fontManager.ReturnNumSprite((newCount / 10) % 10);
             digit1.sprite = fontManager.ReturnNumSprite(newCount % 10);
         }
-
-
-        return;
-
-        //switch (newCount.Length)
-        //{
-        //    case 0:
-        //        digit0.sprite = fontManager.ReturnNumSprite(0);
-        //        digit1.sprite = fontManager.ReturnNumSprite(0);
-        //        break;
-        //    case 1:
-        //        Debug.Log(1);
-        //        digit0.sprite = fontManager.ReturnNumSprite(0);
-        //        Debug.Log(2);
-        //        digit1.sprite = fontManager.ReturnNumSprite(((int)newCount[0]) + 1);
-        //        Debug.Log(3);
-        //        break;
-        //    case 2:
-        //        digit0.sprite = fontManager.ReturnNumSprite(newCount[0]);
-        //        digit1.sprite = fontManager.ReturnNumSprite(newCount[1]);
-        //        break;
-        //    default:
-        //        digit0.sprite = fontManager.ReturnNumSprite(0);
-        //        digit1.sprite = fontManager.ReturnNumSprite(0);
-        //        break;
-        //}
     }
 
 

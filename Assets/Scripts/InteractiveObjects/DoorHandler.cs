@@ -32,6 +32,7 @@ public class DoorHandler : MonoBehaviour
             {
                 isOverlapping = false;
                 EventManager.levelComplete.Invoke();
+                LevelManager.ChangeLevel("level_2");
                 StopCoroutine("CheckForInput");
                 yield return null;
             }
