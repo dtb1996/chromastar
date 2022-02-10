@@ -10,6 +10,7 @@ public class OverlapManager : MonoBehaviour
     public SoundEffect soundEffect;
 
     public static event Action OnAnyCoinCollected;
+    public static event Action OnAnyOrbCollected;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -38,6 +39,10 @@ public class OverlapManager : MonoBehaviour
 
                 OnAnyCoinCollected?.Invoke();
                 break;
+
+            case "Orb":
+                OnAnyOrbCollected?.Invoke();
+                break ;
         }
 
         //if (this.tag == "Coin")
