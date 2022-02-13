@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DoorHandler : MonoBehaviour
 {
+    [SerializeField] string nextScene;
+
     private bool isOverlapping = false;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -32,7 +34,7 @@ public class DoorHandler : MonoBehaviour
             {
                 isOverlapping = false;
                 EventManager.levelComplete.Invoke();
-                LevelManager.ChangeLevel("level_2");
+                LevelManager.ChangeLevel(nextScene);
                 StopCoroutine("CheckForInput");
                 yield return null;
             }

@@ -16,10 +16,14 @@ public class CoinManager : MonoBehaviour
     private void Start()
     {
         //StartCoroutine("IncreaseCount");
-        PlayerInventory.inventoryChange += CollectCoin;
+        //PlayerInventory.inventoryChange += CollectCoin;
 
-        UpdateCount(0);
+        CheckInventory();
     }
+
+    private void OnEnable() => PlayerInventoryManager.PlayerInventoryUpdated += CheckInventory;
+
+    private void OnDisable() => PlayerInventoryManager.PlayerInventoryUpdated -= CheckInventory;
 
     //private IEnumerator IncreaseCount()
     //{
@@ -32,12 +36,13 @@ public class CoinManager : MonoBehaviour
     //    StartCoroutine("IncreaseCount");
     //}
 
-    public void CollectCoin()
+    public void CheckInventory()
     {
-        UpdateCount(PlayerInventory.Instance.coins);
+        //UpdateCoinHUD(PlayerInventoryManager.Instance.coins);
+        UpdateCoinHUD(PlayerStats.Coins);
     }
 
-    public void UpdateCount(int newCount)
+    private void UpdateCoinHUD(int newCount)
     {
         if (newCount < 10)
         {
